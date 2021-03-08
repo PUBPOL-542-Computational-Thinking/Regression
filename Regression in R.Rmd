@@ -1,0 +1,123 @@
+
+```{r}
+mergecsv = "https://github.com/PUBPOL-542-Computational-Thinking/Merge/raw/main/UpdatedTJHemaSamik.csv"
+
+finaldata = read.csv(mergecsv)
+finaldata
+
+row.names(finaldata)= NULL
+
+```
+
+```{r}
+### veryfying data structure
+
+str(finaldata, width = 50, strict.width = 'cut')
+
+```
+
+```{r}
+
+## hypothesis 1 : FDI decreases as percentage of population earning less than $5.50 increases 
+
+hypo1 = formula(FDI~ lessthan5_50)
+
+#hypothesis 2:  FPI decreases as percentage of population earning less than $5.50 increases
+
+hypo2 = formula(FPI~ lessthan5_50) 
+
+#hypothesis 3: Percentage of population earning less than $5.50 decreases as FPI and FIEI advances
+
+hypo3 =formula(lessthan5_50~ FPI*FIEI ) 
+
+
+
+```
+
+```{r}
+### Getting results 
+
+Result1 = glm(hypo1, 
+              data = finaldata,
+              family = 'gaussian') 
+
+Result2 = glm(hypo2, 
+              data = finaldata,
+              family = 'gaussian')
+
+Result3 = glm(hypo3, 
+              data = finaldata,
+              family = 'gaussian') 
+
+ 
+```
+
+```{r}
+### Seeing results 
+
+# For the first hypothesis: Can we observe a decrease in FDI when the poverty rate (percentage of people earning less than 5.50 falls) 
+
+summary(Result1)
+```
+```{r}
+### Interpretation for hypothesis 1. We can observe an indirect relationship between poverty and FDI like we had initially hypothesize. 
+```
+
+```{r}
+### Results for hypothesis 2 
+ 
+summary(Result2) 
+
+
+# The results also show an indirect relationship
+```
+
+```{r}
+
+## results for hypothesis 3 
+
+summary(Result3)
+```
+
+```{r}
+### Searching for a better model 
+
+anova(Result1, Result2, Result3, test = "Chisq")
+```
+```{r} 
+## Checking the Rsquare to understand the residual value for all 3 hypothesis
+library(rsq) 
+rsq(Result1, adj = T) 
+rsq(Result2, adj = T) 
+rsq(Result3, adj = T) 
+
+
+
+```
+
+```{r}
+# summary plots to visualize the data
+
+library(dotwhisker) 
+
+library(ggplot2) 
+
+dwplot(Result1,by_2sd = F)
+```
+
+```{r}
+# Using the margins library
+
+library(margins) 
+
+cplot(Result2,'lessthan5_50')  
+
+cplot(Result3,'lessthan5_50')
+
+```
+
+```{r}
+## Looking into the interactions 
+persp(Result3)
+```
+
