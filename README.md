@@ -1,10 +1,10 @@
 # Author: Samikshya Pandey
 
-###File type: Regression 
+### File type: Regression 
 #### Full Form: 
-  ####FDI:Foreign Direct Investment
-  ####FIEI: Forest Import Export Index
-##### #FPI: Financial Productivity Index 
+  ##### FDI:Foreign Direct Investment
+  ##### FIEI: Forest Import Export Index
+###### FPI: Financial Productivity Index 
 
-#### In the following code, please find instruction to conduct a OLS regression anlysis. There are three hypothesis test conducted. The dataset utilized is "UpdatedTJHemaSamik.csv. Following the OLS regressions, Residual tests and visual interpretation of the tests can also be found. 
+#### In the following code, please find instruction to conduct a OLS regression anlysis. There are three hypothesis test conducted. The dataset utilized is "UpdatedTJHemaSamik.csv. Following the OLS regressions, Residual tests and visual interpretation of the analysis conducted can also be found. 
 
